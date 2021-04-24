@@ -1,11 +1,14 @@
-<div class="container">
-  <h3>Friendzy</h3>
-  <div class="row">
-    <div class="col-4">
-      Add person form goes here
-    </div>
-    <div class="col">
-      Person list goes here
-    </div>
-  </div>
+<mat-toolbar>
+  <span>Friendzy</span>
+  <span class="spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [routerLink]="['/home']">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" [routerLink]="['/visualize']">
+    <mat-icon>scatter_plot</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container-fluid mt-2">
+  <router-outlet></router-outlet>
 </div>
