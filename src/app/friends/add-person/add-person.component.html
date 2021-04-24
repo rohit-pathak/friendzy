@@ -2,7 +2,7 @@
 <form class="example-form" #personForm="ngForm" (ngSubmit)="addPerson(personForm)">
   <mat-form-field class="example-full-width">
     <mat-label>Name</mat-label>
-    <input matInput placeholder="Ex. Nick Lee" ngModel name="name" required>
+    <input matInput #nameInput placeholder="Ex. Nick Lee" ngModel name="name" required autofocus>
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Age (in years)</mat-label>

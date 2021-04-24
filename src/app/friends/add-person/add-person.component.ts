@@ -1,5 +1,9 @@
+import { Person } from './../person';
+import { FriendService } from './../friend.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ViewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-add-person',
@@ -8,11 +12,21 @@ import { NgForm } from '@angular/forms';
 })
 export class AddPersonComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('nameInput') nameInputRef: ElementRef;
+
+  constructor(private friendService: FriendService) { }
 
   addPerson(form: NgForm): void {
-    console.log(form);
-    console.log(form.valid);
+    if (!form.valid) {
+      console.log('Form is invalid!');
+      return;
+    }
+    // console.log(form);
+    const {name, weight, age} = form.value;
+    const person = new Person(name, age, weight);
+    this.friendService.addPerson(person);
+    form.resetForm();
+    this.nameInputRef.nativeElement.focus();
   }
 
   ngOnInit(): void {

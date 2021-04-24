@@ -1,5 +1,7 @@
+import { FriendService } from './../friend.service';
 import { Component, OnInit } from '@angular/core';
 import { Person } from './../person';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,15 +14,16 @@ export class PersonListComponent implements OnInit {
   columnsToDisplay = ['name', 'age', 'weight'];
   expandedPerson: Person | null;
 
-  persons: Person[] = [
-    {name: 'Rohit', age: 30, weight: 162, friends: []},
-    {name: 'Marcos', age: 43, weight: 155, friends: []},
-    {name: 'Shreyans', age: 30, weight: 159, friends: []}
-  ];
+  persons: Observable<Person[]>;
 
-  constructor() { }
+  constructor(private friendService: FriendService) { }
 
   ngOnInit(): void {
+    this.persons = this.friendService.getPersons();
+    this.persons.subscribe(
+      data => data,
+      err => console.error(err)
+    );
   }
 
 }
