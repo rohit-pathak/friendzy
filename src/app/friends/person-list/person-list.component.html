@@ -1,1 +1,16 @@
-<p>person-list works!</p>
+<h4>All people</h4>
+<mat-accordion>
+  <mat-expansion-panel hideToggle *ngFor="let person of persons">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{person.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <span class="text-right">({{person.friends.length}} friends)</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>Age: {{person.age}}</div>
+    <div>Weight: {{person.age}}</div>
+    <div>Friends: (TODO: list friends here)</div>
+  </mat-expansion-panel>
+</mat-accordion>
