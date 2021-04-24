@@ -1,3 +1,4 @@
+import { FriendsModule } from './friends/friends.module';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +27,7 @@ import { VisualizeComponent } from './visualize/visualize.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    FriendsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

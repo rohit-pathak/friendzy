@@ -1,0 +1,21 @@
+<h4>Add a new person</h4>
+<form class="example-form" #personForm="ngForm" (ngSubmit)="addPerson(personForm)">
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Ex. Nick Lee" ngModel name="name" required>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Age (in years)</mat-label>
+    <input matInput placeholder="Ex. 34" ngModel name="age" required>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Weight (in pounds)</mat-label>
+    <input matInput placeholder="Ex. 155" ngModel name="weight" required>
+  </mat-form-field>
+  <h5>Friends: <span>(None selected)</span></h5>
+  <mat-form-field class="example-full-width">
+    <mat-label>Search for friends</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!personForm.valid">Primary</button>
+</form>
