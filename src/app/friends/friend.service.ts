@@ -27,6 +27,17 @@ export class FriendService {
       .filter(({name}) => nameSet.has(name)) as Person[]);
   }
 
+  searchFriends(term: string): Observable<string[]> {
+    if (!term){
+      return of([]);
+    }
+    term = term.toLowerCase();
+    return of(
+      Object.keys(this.dataStore.persons)
+      .filter(name => name.toLowerCase().includes(term))
+    );
+  }
+
   addPerson(person: Person): void {
     const newEntry = {...person};
     this.dataStore.persons[person.name] = newEntry;
