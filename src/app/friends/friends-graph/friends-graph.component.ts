@@ -23,7 +23,7 @@ export class FriendsGraphComponent implements OnInit {
   }
 
   renderGraph(data): void {
-    // Ref: https://observablehq.com/@d3/force-directed-graph
+    // Ref: https://observablehq.com/@garciaguillermoa/force-directed-graph
     console.log('rendering');
     const width = 600;
     const height = 600;
@@ -65,7 +65,10 @@ export class FriendsGraphComponent implements OnInit {
       .forceSimulation(nodes)
       .force(
         'link',
-        d3.forceLink(links).id((d: any) => d.id)
+        d3
+          .forceLink(links)
+          .distance(100)
+          .id((d: any) => d.id)
       )
       .force('charge', d3.forceManyBody())
       .force('center', d3.forceCenter(width / 2, height / 2));
@@ -81,11 +84,14 @@ export class FriendsGraphComponent implements OnInit {
 
     const node = svg
       .append('g')
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 1.5)
-      .selectAll('circle')
+      .selectAll('.node')
       .data(nodes)
-      .join('circle')
+      .join('g')
+      .attr('class', 'node')
+      .call(drag(simulation));
+
+    const circles = node
+      .append('circle')
       .attr('r', (d: any) => {
         // radius is proportional to weight
         const weightToRadius = d3
@@ -98,10 +104,16 @@ export class FriendsGraphComponent implements OnInit {
         'fill',
         (d: any) =>
           d3.schemeOranges[8][`${Math.min(Math.floor(d.age / 20), 7)}`]
-      )
-      .call(drag(simulation));
+      );
+    circles.append('title').text((d: any) => d.id);
 
-    node.append('title').text((d: any) => d.id);
+    node
+      .append('text')
+      .text((d: any) => d.id)
+      .style('fill', '#000')
+      .style('font-size', '12px')
+      .attr('x', 15)
+      .attr('y', 3);
 
     simulation.on('tick', () => {
       // links update as nodes move
@@ -111,7 +123,7 @@ export class FriendsGraphComponent implements OnInit {
         .attr('x2', (d: any) => d.target.x)
         .attr('y2', (d: any) => d.target.y);
 
-      node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
+      node.attr('transform', (d: any) => `translate(${d.x}, ${d.y})`);
     });
   }
 
