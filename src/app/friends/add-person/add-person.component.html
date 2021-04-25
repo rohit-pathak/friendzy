@@ -1,6 +1,5 @@
-<h5>Add a new person</h5>
-<form class="example-form" #personForm="ngForm" (ngSubmit)="addPerson(personForm)"
-  (keydown.enter)="$event.preventDefault()">
+<h2>Add a new person</h2>
+<form class="example-form" #personForm="ngForm" (ngSubmit)="addPerson(personForm)">
   <mat-form-field class="example-full-width">
     <mat-label>Name</mat-label>
     <input matInput #nameInput placeholder="Ex. Nick Lee" ngModel name="name" required autofocus>
@@ -21,7 +20,7 @@
 
   <mat-form-field class="example-full-width">
     <mat-label>Search for friends to add (press Enter to search)</mat-label>
-    <input matInput [(ngModel)]="searchTerm" (keydown.enter)="searchFriends()" name="searchTerm">
+    <input matInput [(ngModel)]="searchTerm" (keydown.enter)="searchFriends($event)" name="searchTerm">
   </mat-form-field>
   <div id="friend-results" class="mb-2">
     <div class="friend-search-result" *ngFor="let name of friendSearchResults">

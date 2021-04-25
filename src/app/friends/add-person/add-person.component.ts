@@ -19,7 +19,8 @@ export class AddPersonComponent implements OnInit {
 
   constructor(private friendService: FriendService) { }
 
-  searchFriends(): void {
+  searchFriends(event: Event): void {
+    event.preventDefault();
     this.friendService.searchFriends(this.searchTerm).subscribe(
       names => {
         this.friendSearchResults = names;
