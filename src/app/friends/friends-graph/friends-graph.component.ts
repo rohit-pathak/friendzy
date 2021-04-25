@@ -9,7 +9,6 @@ import { FriendService } from './../friend.service';
   styleUrls: ['./friends-graph.component.scss'],
 })
 export class FriendsGraphComponent implements OnInit {
-  private width = 800;
   private height = 600;
 
   constructor(private friendService: FriendService) {}
@@ -24,9 +23,8 @@ export class FriendsGraphComponent implements OnInit {
 
   renderGraph(data): void {
     // Ref: https://observablehq.com/@garciaguillermoa/force-directed-graph
-    console.log('rendering');
-    const width = 600;
-    const height = 600;
+    const width = parseInt(d3.select('#friends-graph').style('width'), 10);
+    const height = this.height;
 
     const drag = (sim) => {
       function dragstarted(event): void {
@@ -155,8 +153,6 @@ export class FriendsGraphComponent implements OnInit {
       const [source, target] = linkStrings.split(';');
       return { source, target, value: 1 };
     });
-    console.log('nodes:', nodes);
-    console.log('links', links);
     return { nodes, links };
   }
 }
