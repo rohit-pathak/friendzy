@@ -11,6 +11,11 @@
     </mat-expansion-panel-header>
     <div>Age: {{person.age}}</div>
     <div>Weight: {{person.weight}}</div>
-    <div>Friends: (TODO: list friends here)</div>
+    <div>
+      <p>Friends:</p>
+      <ul>
+        <li *ngFor="let friendName of person.friends">{{friendName}}</li>
+      </ul>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>

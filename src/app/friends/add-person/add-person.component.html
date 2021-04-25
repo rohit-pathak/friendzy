@@ -23,7 +23,7 @@
     <mat-label>Search for friends to add (press Enter to search)</mat-label>
     <input matInput [(ngModel)]="searchTerm" (keydown.enter)="searchFriends()" name="searchTerm">
   </mat-form-field>
-  <div id="friend-results">
+  <div id="friend-results" class="mb-2">
     <div class="friend-search-result" *ngFor="let name of friendSearchResults">
       <button mat-icon-button (click)="selectedFriends.add(name)" type="button">
         <mat-icon>add</mat-icon>

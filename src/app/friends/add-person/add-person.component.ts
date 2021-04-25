@@ -30,17 +30,21 @@ export class AddPersonComponent implements OnInit {
 
   addPerson(form: NgForm): void {
     if (!form.valid) {
-      console.log('Form is invalid!');
+      console.error('Form is invalid!');
       return;
     }
     // console.log(form);
     const {name, weight, age} = form.value;
     const person = new Person(name, age, weight, [...this.selectedFriends]);
-    this.friendService.addPerson(person); // TODO: return observable from service and check for success
-    this.selectedFriends.clear();
-    this.friendSearchResults = [];
-    form.resetForm();
-    this.nameInputRef.nativeElement.focus();
+    this.friendService.addOrUpdatePerson(person).subscribe( // TODO: disable form when processing
+      () => {
+        this.selectedFriends.clear();
+        this.friendSearchResults = [];
+        form.resetForm();
+        this.nameInputRef.nativeElement.focus();
+      },
+      err => console.error(err) // Todo display error message in form
+    );
   }
 
   ngOnInit(): void {

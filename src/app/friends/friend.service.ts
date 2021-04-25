@@ -38,7 +38,7 @@ export class FriendService {
     );
   }
 
-  addPerson(person: Person): void {
+  addOrUpdatePerson(person: Person): Observable<boolean> {
     const newEntry = {...person};
     this.dataStore.persons[person.name] = newEntry;
 
@@ -48,6 +48,7 @@ export class FriendService {
     });
 
     this.subject.next(Object.values(this.dataStore.persons) as Person[]);
+    return of(true);
   }
 
 }
