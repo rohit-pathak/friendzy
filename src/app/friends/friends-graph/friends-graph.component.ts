@@ -9,7 +9,7 @@ import { FriendService } from './../friend.service';
   styleUrls: ['./friends-graph.component.scss'],
 })
 export class FriendsGraphComponent implements OnInit {
-  private width = 600;
+  private width = 800;
   private height = 600;
 
   constructor(private friendService: FriendService) {}
@@ -18,11 +18,12 @@ export class FriendsGraphComponent implements OnInit {
     return d3
       .select('#friends-graph')
       .append('svg')
-      .attr('width', this.width)
+      .attr('width', d3.select('#friends-graph').style('width'))
       .attr('height', this.height);
   }
 
   renderGraph(data): void {
+    // Ref: https://observablehq.com/@d3/force-directed-graph
     console.log('rendering');
     const width = 600;
     const height = 600;
@@ -85,16 +86,25 @@ export class FriendsGraphComponent implements OnInit {
       .selectAll('circle')
       .data(nodes)
       .join('circle')
-      .attr('r', 5)
-      .attr('fill', (d: any) => {
-        const scale = d3.scaleOrdinal(d3.schemeCategory10);
-        return scale(d.group);
+      .attr('r', (d: any) => {
+        // radius is proportional to weight
+        const weightToRadius = d3
+          .scaleSqrt() // instead of scaleLinear()
+          .domain([0, 1000])
+          .range([2, 20]);
+        return weightToRadius(d.weight);
       })
+      .attr(
+        'fill',
+        (d: any) =>
+          d3.schemeOranges[8][`${Math.min(Math.floor(d.age / 20), 7)}`]
+      )
       .call(drag(simulation));
 
     node.append('title').text((d: any) => d.id);
 
     simulation.on('tick', () => {
+      // links update as nodes move
       link
         .attr('x1', (d: any) => d.source.x)
         .attr('y1', (d: any) => d.source.y)
