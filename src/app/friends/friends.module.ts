@@ -8,12 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import { AddPersonComponent } from './add-person/add-person.component';
 import { PersonListComponent } from './person-list/person-list.component';
+import { FriendsGraphComponent } from './friends-graph/friends-graph.component';
 
 
 @NgModule({
   declarations: [
     AddPersonComponent,
-    PersonListComponent
+    PersonListComponent,
+    FriendsGraphComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { PersonListComponent } from './person-list/person-list.component';
   ],
   exports: [
     AddPersonComponent,
-    PersonListComponent
+    PersonListComponent,
+    FriendsGraphComponent,
   ]
 })
 export class FriendsModule { }
