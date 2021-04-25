@@ -1,34 +1,74 @@
 <h2>Add a new person</h2>
-<form class="example-form" #personForm="ngForm" (ngSubmit)="addPerson(personForm)">
+<form
+  class="example-form"
+  #personForm="ngForm"
+  (ngSubmit)="addPerson(personForm)"
+>
   <mat-form-field class="example-full-width">
     <mat-label>Name</mat-label>
-    <input matInput #nameInput placeholder="Ex. Nick Lee" ngModel name="name" required autofocus>
+    <input
+      matInput
+      #nameInput
+      placeholder="Ex. Nick Lee"
+      ngModel
+      name="name"
+      required
+      autofocus
+    />
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Age (in years)</mat-label>
-    <input matInput placeholder="Ex. 34" ngModel name="age" required type="number">
+    <input
+      matInput
+      placeholder="Ex. 34"
+      ngModel
+      name="age"
+      required
+      type="number"
+    />
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Weight (in pounds)</mat-label>
-    <input matInput placeholder="Ex. 155" ngModel name="weight" required type="number">
+    <input
+      matInput
+      placeholder="Ex. 155"
+      ngModel
+      name="weight"
+      required
+      type="number"
+    />
   </mat-form-field>
-  
+
   <div class="friend-list mt-3 mb-3">
-    <h3>Friends: <span [hidden]="selectedFriends.size > 0">(None selected)</span></h3>
-    <div *ngFor="let friend of selectedFriends">{{friend}}</div>
+    <h3>
+      Friends: <span [hidden]="selectedFriends.size > 0">(None selected)</span>
+    </h3>
+    <div *ngFor="let friend of selectedFriends">{{ friend }}</div>
   </div>
 
   <mat-form-field class="example-full-width">
     <mat-label>Search for friends to add (press Enter to search)</mat-label>
-    <input matInput [(ngModel)]="searchTerm" (keydown.enter)="searchFriends($event)" name="searchTerm">
+    <input
+      matInput
+      [(ngModel)]="searchTerm"
+      (keydown.enter)="searchFriends($event)"
+      name="searchTerm"
+    />
   </mat-form-field>
   <div id="friend-results" class="mb-2">
     <div class="friend-search-result" *ngFor="let name of friendSearchResults">
       <button mat-icon-button (click)="selectedFriends.add(name)" type="button">
         <mat-icon>add</mat-icon>
       </button>
-      {{name}}
+      {{ name }}
     </div>
   </div>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!personForm.valid">Add</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!personForm.valid"
+  >
+    Add
+  </button>
 </form>

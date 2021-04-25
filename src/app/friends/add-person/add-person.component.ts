@@ -36,9 +36,10 @@ export class AddPersonComponent implements OnInit {
     }
     // console.log(form);
     const {name, weight, age} = form.value;
-    const person = new Person(name, age, weight, [...this.selectedFriends]);
-    this.friendService.addOrUpdatePerson(person).subscribe( // TODO: disable form when processing
-      () => {
+    const person: Person = {name, age, weight, friends: [...this.selectedFriends]};
+    this.friendService.addPerson(person).subscribe( // TODO: disable form when processing
+      (res) => {
+        console.log('Added!', res);
         this.selectedFriends.clear();
         this.friendSearchResults = [];
         form.resetForm();

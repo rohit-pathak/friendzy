@@ -1,5 +1,7 @@
 
-export class Person {
-  constructor(public name: string, public age: number, public weight: number, public friends: string[] = []) {
-  }
+export interface Person {
+  name: string;
+  age: number;
+  weight: number;
+  friends: string[];
 }
