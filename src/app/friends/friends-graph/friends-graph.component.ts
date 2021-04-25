@@ -9,7 +9,7 @@ import { FriendService } from './../friend.service';
   styleUrls: ['./friends-graph.component.scss'],
 })
 export class FriendsGraphComponent implements OnInit {
-  private height = 600;
+  private svgHeight = 600;
 
   constructor(private friendService: FriendService) {}
 
@@ -18,13 +18,13 @@ export class FriendsGraphComponent implements OnInit {
       .select('#friends-graph')
       .append('svg')
       .attr('width', d3.select('#friends-graph').style('width'))
-      .attr('height', this.height);
+      .attr('height', this.svgHeight);
   }
 
   renderGraph(data): void {
     // Ref: https://observablehq.com/@garciaguillermoa/force-directed-graph
     const width = parseInt(d3.select('#friends-graph').style('width'), 10);
-    const height = this.height;
+    const height = this.svgHeight;
 
     const drag = (sim) => {
       function dragstarted(event): void {

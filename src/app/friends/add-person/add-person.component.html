@@ -67,8 +67,11 @@
     mat-raised-button
     color="primary"
     type="submit"
-    [disabled]="!personForm.valid"
+    [disabled]="!personForm.valid || processing"
   >
     Add
   </button>
+  <mat-error [hidden]="!errorMessage">
+    {{ errorMessage }}
+  </mat-error>
 </form>

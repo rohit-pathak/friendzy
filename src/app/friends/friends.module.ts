@@ -5,17 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddPersonComponent } from './add-person/add-person.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { FriendsGraphComponent } from './friends-graph/friends-graph.component';
-
 
 @NgModule({
   declarations: [
     AddPersonComponent,
     PersonListComponent,
-    FriendsGraphComponent
+    FriendsGraphComponent,
   ],
   imports: [
     CommonModule,
@@ -25,11 +25,8 @@ import { FriendsGraphComponent } from './friends-graph/friends-graph.component';
     MatIconModule,
     MatExpansionModule,
     MatListModule,
+    MatSnackBarModule,
   ],
-  exports: [
-    AddPersonComponent,
-    PersonListComponent,
-    FriendsGraphComponent,
-  ]
+  exports: [AddPersonComponent, PersonListComponent, FriendsGraphComponent],
 })
-export class FriendsModule { }
+export class FriendsModule {}
