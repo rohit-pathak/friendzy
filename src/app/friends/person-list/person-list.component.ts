@@ -13,10 +13,21 @@ export class PersonListComponent implements OnInit {
 
   columnsToDisplay = ['name', 'age', 'weight'];
   expandedPerson: Person | null;
+  isDeleting = false;
 
   persons: Observable<Person[]>;
 
   constructor(private friendService: FriendService) { }
+
+  deletePerson(person: Person): void {
+    this.friendService.removePerson(person).subscribe(
+      data => data,
+      err => console.error(err),
+      () => {
+        this.isDeleting = false;
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.persons = this.friendService.getPersons();

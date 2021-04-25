@@ -1,7 +1,7 @@
 import { Person } from './person';
 import { Injectable } from '@angular/core';
 import { Observable, of, from, throwError } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Dexie } from 'dexie';
 
@@ -85,4 +85,27 @@ export class FriendService {
       })
     );
   }
+
+  removePerson(person: Person): Observable<string> {
+    if (!(person.name in this.persons)) {
+      return throwError(new Error(`No person with name ${person.name} exists`));
+    }
+    return from(this.db.persons.delete(person.name)).pipe(
+      mergeMap(() => {
+        const updates: Person[] = person.friends.map(friendName => {
+          const friend = this.persons[friendName];
+          // remove this person as a friend from everyone's friend list
+          friend.friends = friend.friends.filter(f => f !== person.name);
+          return {...friend};
+        });
+        delete this.persons[person.name];
+        return from(this.db.persons.bulkPut(updates));
+      }),
+      map(() => {
+        this.subject.next(Object.values(this.persons));
+        return person.name;
+      })
+    );
+  }
+
 }

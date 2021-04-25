@@ -34,12 +34,10 @@ export class AddPersonComponent implements OnInit {
       console.error('Form is invalid!');
       return;
     }
-    // console.log(form);
     const {name, weight, age} = form.value;
     const person: Person = {name, age, weight, friends: [...this.selectedFriends]};
     this.friendService.addPerson(person).subscribe( // TODO: disable form when processing
       (res) => {
-        console.log('Added!', res);
         this.selectedFriends.clear();
         this.friendSearchResults = [];
         form.resetForm();

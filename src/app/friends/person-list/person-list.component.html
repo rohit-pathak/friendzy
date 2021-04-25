@@ -3,19 +3,20 @@
   <mat-expansion-panel hideToggle *ngFor="let person of persons | async">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{person.name}}
+        {{ person.name }}
       </mat-panel-title>
       <mat-panel-description>
-        <span class="text-right">({{person.friends.length}} friends)</span>
+        <span class="text-right">({{ person.friends.length }} friends)</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <div>Age: {{person.age}}</div>
-    <div>Weight: {{person.weight}}</div>
+    <div>Age: {{ person.age }}</div>
+    <div>Weight: {{ person.weight }}</div>
     <div>
       <p>Friends:</p>
       <ul>
-        <li *ngFor="let friendName of person.friends">{{friendName}}</li>
+        <li *ngFor="let friendName of person.friends">{{ friendName }}</li>
       </ul>
     </div>
+    <button mat-raised-button color="warn" type="button" (click)="deletePerson(person)" [disabled]="isDeleting">Delete</button>
   </mat-expansion-panel>
 </mat-accordion>
