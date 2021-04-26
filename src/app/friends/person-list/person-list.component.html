@@ -17,6 +17,14 @@
         <li *ngFor="let friendName of person.friends">{{ friendName }}</li>
       </ul>
     </div>
-    <button mat-raised-button color="warn" type="button" (click)="deletePerson(person)" [disabled]="isDeleting">Delete</button>
+    <button
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="deletePerson(person)"
+      [disabled]="isDeleting"
+    >
+      Delete
+    </button>
   </mat-expansion-panel>
 </mat-accordion>
